@@ -1,58 +1,62 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-
-function NotFoundComponent() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
+import faviconUrl from "@/assets/flash-narrative-logo.png?url";
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Flash Narrative — Enterprise PR Intelligence" },
+      {
+        name: "description",
+        content:
+          "Real-time narrative intelligence and systemic risk monitoring for enterprise communications teams.",
+      },
+      { name: "author", content: "Flash Narrative" },
+      { name: "theme-color", content: "#0A0A0B" },
+      { property: "og:title", content: "Flash Narrative — Enterprise PR Intelligence" },
+      {
+        property: "og:description",
+        content: "Bloomberg-grade narrative intelligence for global enterprises.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: faviconUrl },
+      { rel: "apple-touch-icon", href: faviconUrl },
     ],
   }),
   shellComponent: RootShell,
-  component: RootComponent,
-  notFoundComponent: NotFoundComponent,
+  component: () => <Outlet />,
+  notFoundComponent: NotFound,
 });
+
+function NotFound() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 text-foreground">
+      <div className="max-w-md text-center">
+        <h1 className="text-7xl font-bold text-gradient-amber">404</h1>
+        <p className="mt-3 text-sm text-muted-foreground">
+          This intelligence channel could not be located.
+        </p>
+        <a
+          href="/"
+          className="mt-6 inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-sm font-semibold text-primary-foreground"
+        >
+          Return to Command Center
+        </a>
+      </div>
+    </div>
+  );
+}
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
@@ -62,8 +66,4 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   );
-}
-
-function RootComponent() {
-  return <Outlet />;
 }
