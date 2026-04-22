@@ -130,10 +130,33 @@ export const API_KEYS: ApiKey[] = [
 ];
 
 export const INDUSTRY_SECTORS = [
-  "Aerospace & Defense",
-  "Banking & Finance",
-  "Energy & Utilities",
+  "Finance",
+  "Tech",
+  "FMCG",
   "Telecommunications",
-  "Consumer Goods",
+  "Energy & Utilities",
   "Government & Public Sector",
+  "Aerospace & Defense",
+] as const;
+
+// Suggested competitors by industry (Smart Feature in Step 1)
+export const SUGGESTED_COMPETITORS: Record<string, string[]> = {
+  Finance: ["GTBank", "Access Bank", "Zenith Bank", "UBA", "First Bank"],
+  Tech: ["Google", "Microsoft", "Meta", "Amazon", "Apple"],
+  FMCG: ["Nestlé", "Unilever", "P&G", "Dangote", "PZ Cussons"],
+  Telecommunications: ["MTN", "Airtel", "Glo", "9mobile"],
+  "Energy & Utilities": ["Shell", "TotalEnergies", "Chevron", "Seplat"],
+  "Government & Public Sector": ["CBN", "NCC", "FIRS"],
+  "Aerospace & Defense": ["Boeing", "Airbus", "Lockheed Martin"],
+};
+
+// Backend API endpoint (override via VITE_API_BASE)
+export const API_BASE: string =
+  (import.meta.env.VITE_API_BASE as string | undefined) ?? "http://localhost:8000/api/v1";
+
+export const SCHEDULE_INTERVALS = [
+  { value: "minute", label: "Every Minute", interval_value: 1 },
+  { value: "minute_5", label: "Every 5 Minutes", interval_value: 5 },
+  { value: "hour", label: "Every Hour", interval_value: 1 },
+  { value: "day", label: "Every Day", interval_value: 1 },
 ] as const;

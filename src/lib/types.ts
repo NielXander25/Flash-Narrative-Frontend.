@@ -88,3 +88,56 @@ export interface ApiKey {
   created: string;
   lastUsed: string;
 }
+
+// ---- Campaign Wizard ----
+export type CampaignSource = "news_and_web" | "social_pulse";
+export type AnalysisType = "historical" | "live";
+export type ScheduleInterval = "minute" | "hour" | "day";
+
+export interface CampaignKpis {
+  sentiment_target: number | null;
+  share_of_voice_target: number | null;
+  volume_target: number | null;
+  engagement_rate_target: number | null;
+}
+
+export interface ScheduleConfig {
+  interval_type: ScheduleInterval;
+  interval_value: number;
+  specific_times: string[];
+}
+
+export interface CampaignPayload {
+  campaign_name: string;
+  target: string;
+  industry: string;
+  competitors: string[];
+  sources: CampaignSource[];
+  kpis: {
+    sentiment_target?: number;
+    share_of_voice_target?: number;
+    volume_target?: number;
+    engagement_rate_target?: number;
+  };
+  alert_threshold: number | null;
+  alert_emails: string[];
+  analysis_type: AnalysisType;
+  date_start: string | null;
+  date_end: string | null;
+  schedule_config: ScheduleConfig | null;
+}
+
+export interface CampaignDraft {
+  campaign_name: string;
+  target: string;
+  industry: string;
+  competitors: string[];
+  sources: CampaignSource[];
+  kpis: CampaignKpis;
+  alert_threshold: number | null;
+  alert_emails: string[];
+  analysis_type: AnalysisType;
+  date_start: string;
+  date_end: string;
+  schedule: ScheduleConfig;
+}
