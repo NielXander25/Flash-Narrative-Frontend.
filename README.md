@@ -56,12 +56,6 @@ There is a common confusion worth clearing up: **shadcn/ui is built on Tailwind*
 
 This combination gives us the velocity of a component library with **zero vendor lock-in** — every UI primitive is editable source code in our repo.
 
-### TanStack Start (over Next.js)
-- File-based routing **with end-to-end type safety** for params, search-params, and loaders (Next.js does not type these).
-- Built-in **server functions** that work on Cloudflare Workers (edge), not just Node.
-- Integrated TanStack Query / Router context for SSR-safe data fetching.
-- The Lovable platform deploys this stack natively — switching to Next.js would require a different host and break SSR.
-
 ### TanStack Query
 Server state ≠ client state. Query gives us caching, refetching, optimistic updates, and request deduplication out of the box, instead of hand-rolling `useEffect` + `useState` for every API call.
 
@@ -280,16 +274,6 @@ All visual tokens live in `src/styles.css` and are referenced through Tailwind's
 ```
 
 Utility classes such as `.panel`, `.gradient-amber`, and `.text-gradient-amber` provide the recurring "luxury fintech" surfaces.
-
----
-
-## 🚢 Deployment
-
-This project targets **Cloudflare Workers** (edge SSR), configured via `wrangler.jsonc` and the Cloudflare Vite plugin.
-
-The **simplest path** is the in-app **Publish** button on Lovable, which handles the build and edge deployment automatically.
-
-> Note: This is **not** a Next.js app, so a default Vercel "Next.js" deployment will not work. If you want to host on Vercel, you must use their generic build output (`npm run build`) and serve it as a Worker-compatible bundle — Lovable's built-in publishing is the supported route.
 
 ---
 
