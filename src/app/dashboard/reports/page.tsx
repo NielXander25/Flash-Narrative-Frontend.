@@ -1,23 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import { Eye, Download, FileText, Plus } from "lucide-react";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { Button } from "@/components/ui/button";
 import { REPORTS } from "@/lib/constants";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Eye, Download, FileText, Plus } from "lucide-react";
 
-export const Route = createFileRoute("/dashboard/reports")({
-  head: () => ({
-    meta: [
-      { title: "Reports Command Center — Flash Narrative" },
-      {
-        name: "description",
-        content: "Build, export and send executive intelligence briefings to clients.",
-      },
-    ],
-  }),
-  component: ReportsPage,
-});
+export const metadata: Metadata = {
+  title: "Reports Command Center — Flash Narrative",
+  description: "Build, export and send executive intelligence briefings to clients.",
+};
 
 const statusClass = {
   "report-sent": "bg-success/15 text-success border-success/30",
@@ -33,7 +25,7 @@ const statusLabel = {
   draft: "DRAFT",
 };
 
-function ReportsPage() {
+export default function ReportsPage() {
   return (
     <DashboardShell breadcrumbs={[{ label: "Workspace" }, { label: "Reports" }]}>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">

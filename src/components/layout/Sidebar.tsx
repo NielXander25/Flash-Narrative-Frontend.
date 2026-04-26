@@ -1,4 +1,7 @@
-import { Link, useLocation } from "@tanstack/react-router";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { LogOut, LifeBuoy, Repeat, ChevronRight } from "lucide-react";
 import { NAV_ITEMS, APP } from "@/lib/constants";
 import { Logo } from "./Logo";
@@ -10,11 +13,10 @@ interface SidebarProps {
 }
 
 export function Sidebar({ open = true, onNavigate }: SidebarProps) {
-  const location = useLocation();
-  const path = location.pathname;
+  const pathname = usePathname();
 
-  const isActive = (to: string) =>
-    to === "/dashboard" ? path === "/dashboard" : path.startsWith(to);
+  const isActive = (href: string) =>
+    href === "/dashboard" ? pathname === "/dashboard" : pathname.startsWith(href);
 
   return (
     <aside
@@ -39,11 +41,11 @@ export function Sidebar({ open = true, onNavigate }: SidebarProps) {
         <ul className="space-y-1">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
-            const active = isActive(item.to);
+            const active = isActive(item.href);
             return (
-              <li key={item.to}>
+              <li key={item.href}>
                 <Link
-                  to={item.to}
+                  href={item.href}
                   onClick={onNavigate}
                   className={cn(
                     "group flex items-center gap-3 rounded-md px-3 py-2.5 text-sm transition-colors",

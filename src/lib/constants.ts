@@ -21,11 +21,11 @@ import type {
 
 // ---- Navigation (Create Campaign is intentionally NOT a sidebar item) ----
 export const NAV_ITEMS: NavItem[] = [
-  { title: "Command Center", to: "/dashboard", icon: LayoutGrid },
-  { title: "Intelligence Dashboard", to: "/dashboard/intelligence", icon: Activity },
-  { title: "Reports", to: "/dashboard/reports", icon: FileBarChart },
-  { title: "API Management", to: "/dashboard/api", icon: KeyRound },
-  { title: "Settings", to: "/dashboard/settings", icon: Settings },
+  { title: "Command Center", href: "/dashboard", icon: LayoutGrid },
+  { title: "Intelligence Dashboard", href: "/dashboard/intelligence", icon: Activity },
+  { title: "Reports", href: "/dashboard/reports", icon: FileBarChart },
+  { title: "API Management", href: "/dashboard/api", icon: KeyRound },
+  { title: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
 export const APP = {
@@ -150,9 +150,9 @@ export const SUGGESTED_COMPETITORS: Record<string, string[]> = {
   "Aerospace & Defense": ["Boeing", "Airbus", "Lockheed Martin"],
 };
 
-// Backend API endpoint (override via VITE_API_BASE)
+// Backend API endpoint (override via NEXT_PUBLIC_API_BASE)
 export const API_BASE: string =
-  (import.meta.env.VITE_API_BASE as string | undefined) ?? "http://localhost:8000/api/v1";
+  process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000/api/v1";
 
 export const SCHEDULE_INTERVALS = [
   { value: "minute", label: "Every Minute", interval_value: 1 },
