@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, type KeyboardEvent } from "react";
 import { X } from "lucide-react";
 import { Input } from "@/components/ui/input";

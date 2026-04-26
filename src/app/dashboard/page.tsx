@@ -1,26 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import { Activity } from "lucide-react";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { COMMAND_KPIS } from "@/lib/constants";
 import { KPICard } from "@/components/dashboard/KPICard";
 import { CrisisRadar } from "@/components/dashboard/CrisisRadar";
 import { AgencyPortfolio } from "@/components/dashboard/AgencyPortfolio";
-import { Activity } from "lucide-react";
 
-export const Route = createFileRoute("/dashboard/")({
-  head: () => ({
-    meta: [
-      { title: "Global Command Center — Flash Narrative" },
-      {
-        name: "description",
-        content:
-          "Real-time narrative intelligence and systemic risk monitoring across your global brand portfolio.",
-      },
-    ],
-  }),
-  component: CommandCenter,
-});
+export const metadata: Metadata = {
+  title: "Global Command Center — Flash Narrative",
+  description:
+    "Real-time narrative intelligence and systemic risk monitoring across your global brand portfolio.",
+};
 
-function CommandCenter() {
+export default function CommandCenterPage() {
   return (
     <DashboardShell breadcrumbs={[{ label: "Workspace" }, { label: "Command Center" }]}>
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">

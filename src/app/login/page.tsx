@@ -1,5 +1,8 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+"use client";
+
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,14 +11,10 @@ import { Logo } from "@/components/layout/Logo";
 import { setAuthToken } from "@/lib/api-client";
 import { API_BASE } from "@/lib/constants";
 
-export const Route = createFileRoute("/login")({
-  component: LoginPage,
-});
-
 type Mode = "signin" | "signup";
 
-function LoginPage() {
-  const navigate = useNavigate();
+export default function LoginPage() {
+  const router = useRouter();
   const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +35,7 @@ function LoginPage() {
           const err = await res.json().catch(() => ({}));
           throw new Error(err.detail ?? "Registration failed");
         }
-        toast.success("Account created. Signing you in…");
+        toast.success("Account created. Signing you in...");
       }
       const form = new URLSearchParams();
       form.set("username", email);
@@ -53,7 +52,7 @@ function LoginPage() {
       const data = (await res.json()) as { access_token: string };
       setAuthToken(data.access_token);
       toast.success("Welcome back");
-      navigate({ to: "/dashboard" });
+      router.push("/dashboard");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Authentication failed");
     } finally {
@@ -176,7 +175,7 @@ function LoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="********"
                 required
                 minLength={8}
                 autoComplete={mode === "signin" ? "current-password" : "new-password"}
@@ -184,14 +183,14 @@ function LoginPage() {
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Please wait…" : mode === "signin" ? "Sign In" : "Create Account"}
+              {loading ? "Please wait..." : mode === "signin" ? "Sign In" : "Create Account"}
             </Button>
           </form>
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
             {mode === "signin" ? (
               <>
-                Don't have an account?{" "}
+                {"Don't have an account? "}
                 <button
                   className="font-medium text-primary hover:underline"
                   onClick={() => setMode("signup")}
@@ -214,8 +213,8 @@ function LoginPage() {
         </div>
 
         <p className="mt-6 text-center text-xs text-muted-foreground">
-          <Link to="/dashboard" className="hover:text-foreground">
-            ← Back to dashboard
+          <Link href="/dashboard" className="hover:text-foreground">
+            &larr; Back to dashboard
           </Link>
         </p>
       </div>

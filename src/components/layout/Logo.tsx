@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import logo from "@/assets/flash-narrative-logo.png";
+import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
@@ -10,9 +10,13 @@ interface LogoProps {
 
 export function Logo({ withText = true, className, size = 32 }: LogoProps) {
   return (
-    <Link to="/" className={cn("flex items-center gap-2.5", className)} aria-label="Flash Narrative home">
-      <img
-        src={logo}
+    <Link
+      href="/"
+      className={cn("flex items-center gap-2.5", className)}
+      aria-label="Flash Narrative home"
+    >
+      <Image
+        src="/images/flash-narrative-logo.png"
         alt="Flash Narrative logo"
         width={size}
         height={size}

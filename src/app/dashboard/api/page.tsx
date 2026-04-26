@@ -1,25 +1,17 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { Metadata } from "next";
+import { Eye, Trash2, Plus, ShieldCheck, Webhook } from "lucide-react";
 import { DashboardShell } from "@/components/layout/DashboardShell";
 import { KPICard } from "@/components/dashboard/KPICard";
 import { API_KEYS } from "@/lib/constants";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Eye, Trash2, Plus, ShieldCheck, Webhook } from "lucide-react";
 
-export const Route = createFileRoute("/dashboard/api")({
-  head: () => ({
-    meta: [
-      { title: "API Management — Flash Narrative" },
-      {
-        name: "description",
-        content: "Manage Flash Narrative API keys, webhooks and access permissions.",
-      },
-    ],
-  }),
-  component: ApiPage,
-});
+export const metadata: Metadata = {
+  title: "API Management — Flash Narrative",
+  description: "Manage Flash Narrative API keys, webhooks and access permissions.",
+};
 
-function ApiPage() {
+export default function ApiPage() {
   return (
     <DashboardShell breadcrumbs={[{ label: "Workspace" }, { label: "API Hub" }]}>
       <div className="mb-6 panel-elevated flex items-center gap-3 border-l-2 border-l-primary p-4">
